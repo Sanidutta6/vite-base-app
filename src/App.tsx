@@ -1,9 +1,18 @@
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { routeTree } from "./routeTree.gen";
+import {  } from "@/components/component-example";
+
+const router = createRouter({
+    routeTree,
+    context: undefined,
+})
+
 export function App() {
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="font-medium">Hello World</div>
-    </div>
-  )
+    return (
+        <RouterProvider
+            router={router}
+        />
+    );
 }
 
-export default App
+export default App;
