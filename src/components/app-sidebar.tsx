@@ -9,6 +9,12 @@ import {
     BookCheck,
     Shell,
     type LucideIcon,
+    ChevronsUpDown,
+    Sparkles,
+    BadgeCheck,
+    CreditCard,
+    Bell,
+    LogOut,
 } from "lucide-react";
 
 import {
@@ -19,8 +25,8 @@ import {
 import {
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarGroup,
-    SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
@@ -30,6 +36,8 @@ import {
     SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "@tanstack/react-router";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 // Type definitions
 interface NavItem {
@@ -123,6 +131,12 @@ const SidebarNavConfig: SidebarNavConfigType = {
     ],
 };
 
+const user = {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "https://github.com/shadcn.png",
+};
+
 export function AppSidebar() {
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const location = useLocation();
@@ -177,7 +191,6 @@ export function AppSidebar() {
                             groupIndex === 1 ? "group-data-[collapsible=icon]:hidden" : ""
                         }
                     >
-                        {/* {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>} */}
                         <SidebarMenu>
                             {group.items
                                 .filter((item) => hasPermission(item.permissions || []))
@@ -237,6 +250,81 @@ export function AppSidebar() {
                     </SidebarGroup>
                 ))}
             </SidebarContent>
+            <SidebarFooter>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger
+                                render={
+                                    <SidebarMenuButton
+                                        size="lg"
+                                        className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                                    >
+                                        <Avatar className="h-8 w-8 rounded-lg">
+                                            <AvatarImage src={user.avatar} alt={user.name} />
+                                            <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                                        </Avatar>
+                                        <div className="grid flex-1 text-left text-sm leading-tight">
+                                            <span className="truncate font-medium">{user.name}</span>
+                                            <span className="truncate text-xs">{user.email}</span>
+                                        </div>
+                                        <ChevronsUpDown className="ml-auto size-4" />
+                                    </SidebarMenuButton>
+                                }
+                            />
+                            <DropdownMenuContent
+                                className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+                                side={isMobile ? "bottom" : "right"}
+                                align="end"
+                                sideOffset={4}
+                            >
+                                <DropdownMenuGroup>
+                                    <DropdownMenuLabel className="p-0 font-normal">
+                                        <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                                            <Avatar className="h-8 w-8 rounded-lg">
+                                                <AvatarImage src={user.avatar} alt={user.name} />
+                                                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                                            </Avatar>
+                                            <div className="grid flex-1 text-left text-sm leading-tight">
+                                                <span className="truncate font-medium">{user.name}</span>
+                                                <span className="truncate text-xs">{user.email}</span>
+                                            </div>
+                                        </div>
+                                    </DropdownMenuLabel>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <Sparkles />
+                                        Upgrade to Pro
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <BadgeCheck />
+                                        Account
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <CreditCard />
+                                        Billing
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <Bell />
+                                        Notifications
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>
+                                    <LogOut />
+                                    Log out
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+
+            </SidebarFooter>
         </Sidebar>
     );
 }
