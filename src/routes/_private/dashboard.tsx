@@ -31,7 +31,6 @@ import {
 } from "@/components/ui/toggle-group";
 import { useEffect, useState } from 'react';
 
-const description = "An interactive area chart"
 const chartData = [
   { date: "2024-04-01", desktop: 222, mobile: 150 },
   { date: "2024-04-02", desktop: 97, mobile: 180 },
