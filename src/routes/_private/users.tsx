@@ -4,7 +4,7 @@ import { Edit, Ellipsis, PlusCircle, Trash2, Mail, Phone, MapPin, Users, Briefca
 
 import { Badge } from '@/components/ui/badge';
 import usersList from "@/data/user_list.json";
-import type { UserType } from '@/@types/users';
+import type { UserType } from '@/types/users';
 import { Button } from '@/components/ui/button';
 import TablePagination from '@/components/table-pagination';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"

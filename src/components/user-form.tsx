@@ -19,7 +19,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import type { UserType } from "@/@types/users"
+import type { UserType } from "@/types/users"
 
 type UserFormData = Omit<UserType, 'id'>;
 
